@@ -1,0 +1,108 @@
+/*
+    Denna färg-mall har jag använt:
+    https://colorhunt.co/palette/2121213232320d737714ffec
+*/
+
+span
+{
+    position: absolute; 
+    top: 0px;
+    right: 80px;
+    padding: 2px;
+}
+
+.nav-name
+{
+    font-family: 'Caramel', cursive;
+    color: #14FFEC;
+}
+
+nav
+{
+    letter-spacing: 2px;
+    display: inline-block;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: uppercase;
+    overflow: hidden;
+    width: 100%;
+    font-size: 40px;
+    padding-left: 10px;
+}
+.sticky-navbar 
+{
+    background-color: #212121;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+hr{
+    overflow: visible; /* For IE */
+    height: 30px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+}
+
+
+.link
+{
+    position: relative;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+
+}
+
+header
+{
+    color: #0D7377;
+}
+
+body
+{
+    background: linear-gradient(#212121, #0D7377) ;
+    color: #14FFEC;
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+footer
+{
+
+}
+
+.headimg
+{
+    width: "350px";
+    height: "500px";
+}
+
+.headtext
+{
+    display: inline-block;
+    padding-left: 100px;
+    font-family: 'Caramel', cursive;
+    font-size: 200px;
+}
+
+h2
+{
+    text-decoration: underline;
+    font-family: 'Secular One', sans-serif;
+    font-size: 50px;
+    
+}
+
+a
+{
+    color: #14FFEC;
+}
+
+canvas{
+    border: 2px solid black;
+    background-color: white;
+}

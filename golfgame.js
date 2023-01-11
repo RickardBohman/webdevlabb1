@@ -1,4 +1,4 @@
-window.addEventListener("load", () => {
+
 const canvas = document.querySelector("#canvas");
 const context = canvas.getContext("2d");
 
@@ -11,33 +11,68 @@ function resizing() {
     canvas.width = window.innerWidth;
 }
 
+addEventListener("keydown", function(e){
+    console.log(e)
+
+    if(e.code == 'KeyD'){
+        vx = 5;
+    } 
+    if(e.code == 'KeyA'){
+        vx = -5;
+    } 
+    if(e.code == 'KeyW'){
+        vy = -5,
+        grounded = false;
+    } 
+    console.log(e.code)
+})
+
+addEventListener("keyup", function(e){
+    if(e.code == 'KeyD'){
+        vx = 0;
+    } 
+    if(e.code == 'KeyA'){
+        vx = 0;
+    } 
+    if(e.code == 'KeyW'){
+        vy = 0;
+    } 
+    console.log(e.code)
+})
+
+
+
 //Making it move
 let x = 110;
 let y = 645; 
 
-let vxl = 0;
-let vxr = 0;
+let vx = 0;
 let vy = 0;
+
+let speed = 1;
 
 let dx = 2;
 let dy = -2;
+
+function updateBallPos(){
+    dx = 1 * speed;
+    dy = 1 * speed;
+}
+
 
 let grounded = false;
 
 const ballradius = 5;
 
-canvas.addEventListener("keydown", function(e){
-    if(e.code == 'keyD') vxr = 5;
-    if(e.code == 'keyA') vxl = -5;
-    if(e.code == 'keyW') vy = -5;
-})
+var window_height = window.height;
+var window_width = window_width;
 
-canvas.addEventListener("keyUp", function(e){
-    if(e.code == 'keyD') vxr = 0;
-    if(e.code == 'keyA') vxl = -0;
-    if(e.code == 'keyW') vy = -0;
-})
 
+
+let preLocation = {
+    x: x - 5,
+    y: y - 15
+}
 
 
 
@@ -52,32 +87,46 @@ function drawBall(){
 }
 
 
-function draw(e){
-    context.clearRect( 0, 0, canvas.width, canvas,height);
-    drawBall(); 
-    x += dx;
-    y += dy;
+function draw(){
+    drawBall();
+    preLocation.x += vx;
+    preLocation.y += vy;
+    x += vx;
+    y += vy;
 }
 
 setInterval(function Gravity(){
     if(grounded == false){
-        vy += 0.5;
+        vy += 0.02;
     }
 })
 
 function update(){
-    x += vxl;
-    x += vxr;
-    y = vy;
-    drawBall()
+    checkHole()
+    drawshit();
+    preLocation.x += vx;
+    preLocation.y += vy;
+    x += vx;
+    y += vy;
     colision()
+    draw()
     requestAnimationFrame(update)
 }
 
 function colision(){
-    if(y >= canvas.height - 70){
+    if(y >= canvas.height - 70){    
         y = canvas.height - 70
+        preLocation.y = canvas.height - 70
         grounded = true;
+    }
+}
+
+function checkHole(){
+    console.log(y)
+    if((x >= 1190 && x <= 1220) &&( y <= 650 && y >= 645)){
+        alert("Nice Shot!")
+        x = 110;
+        y = 645;
     }
 }
 
@@ -87,40 +136,47 @@ update()
 
 
 
-//Marken
-context.beginPath();
-context.fillStyle = "Green";
-context.fillRect(0, 650, 1600, 100);
-context.closePath();
 
-//Trädet
-context.beginPath();
-context.fillStyle = "Brown";
-context.fillRect(1450 , 150, 200, 500);
-context.arc(1410, 50, 150, 0, 2 * Math.PI);
-context.fillStyle = "green"
-context.fill();
-context.strokeStyle = "green";
-context.stroke();
-context.closePath();
-context.beginPath();
-context.arc(1460, 200, 100, 0, 2 * Math.PI);
-context.fillStyle = "green";
-context.fill();
-context.stroke();
-context.closePath();
-context.beginPath();
-context.strokeStyle = "Brown";
-context.lineWidth = 30;
-context.moveTo(1500, 450);
-context.lineTo(1350, 350)
-context.stroke();
-context.closePath();
+function drawshit(){
 
-// Flaggan
-context.beginPath();
-context.moveTo(1200, 650)
-context.lineTo(1200, 500)
+    context.fillStyle = "white";
+    context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+    
+    
+    //Marken
+    context.beginPath();
+    context.fillStyle = "Green";
+    context.fillRect(0, 650, 1600, 100);
+    context.closePath();
+    
+    //Trädet
+    context.beginPath();
+    context.fillStyle = "Brown";
+    context.fillRect(1450 , 150, 200, 500);
+    context.arc(1410, 50, 150, 0, 2 * Math.PI);
+    context.fillStyle = "green"
+    context.fill();
+    context.strokeStyle = "green";
+    context.stroke();
+    context.closePath();
+    context.beginPath();
+    context.arc(1460, 200, 100, 0, 2 * Math.PI);
+    context.fillStyle = "green";
+    context.fill();
+    context.stroke();
+    context.closePath();
+    context.beginPath();
+    context.strokeStyle = "Brown";
+    context.lineWidth = 30;
+    context.moveTo(1500, 450);
+    context.lineTo(1350, 350)
+    context.stroke();
+    context.closePath();
+    
+    // Flaggan
+    context.beginPath();
+    context.moveTo(1200, 650)
+    context.lineTo(1200, 500)
 context.lineWidth = 5;
 context.strokeStyle = "black";
 context.stroke();
@@ -229,6 +285,7 @@ context.lineTo(40, 571);
 context.lineTo(50, 560);
 context.stroke();
 context.closePath();
+}
 //bollen
 /*
 context.beginPath();
@@ -241,7 +298,7 @@ context.closePath();
 
 
 
-});
+
 
 
 

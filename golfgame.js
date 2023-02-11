@@ -119,6 +119,18 @@ function colision(){
         preLocation.y = canvas.height - 70
         grounded = true;
     }
+
+    if(x < 110){
+        x = 110
+    }
+
+    if(x > 1450){
+        x = 1450
+    }
+
+    if(y > canvas.height){
+        y = canvas.height
+    }
 }
 
 function checkHole(){

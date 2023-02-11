@@ -1,4 +1,4 @@
-window.onscroll = function() {
+windows.onscroll = function() {
     stickynavbar()
 } 
 
